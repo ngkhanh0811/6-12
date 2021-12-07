@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<!--Đặt tên theo angular.js-->
+<div ng-app="costApp" ng-controller="CostController">
+    <b>Bill:</b>
+<!--    Tạo input có giới hạn bằng 0 và đặt tên cho input là ng-model=qty-->
+    <div> Quantity: <input type="number" min="0" ng-model="qty" required > </div>
+<div>Cost: <input type="number" min="0" ng-model="cost" required> </div>
+<div>
+    <b>Total:</b>
+    <span>
+<!--        Kí tự '$' đứng trước giá trị và nút Pay-->
+        {{total | currency:' $ '}}
+    </span>
+<!--    Đặt tên class cho button và sử dụng hàm pay() cho nút Pay-->
+    <button class="btn" ng-click="pay()">Pay</button>
+</div>
+<script>
+    // Khai báo và viết hàm pay()
+    var app = angular.module('costApp', []);
+    app.controller('CostController', function($scope) {
+        // Khai báo các giá trị ban đầu của qty, cost, total là 0
+        $scope.qty = 0;
+        $scope.cost = 0;
+        $scope.total = 0;
+        $scope.pay = function(){
+            this.total = this.qty*this.cost
+        };
+    });
+</script>
+</div>
+</body>
+</html>

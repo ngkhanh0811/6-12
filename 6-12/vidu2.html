@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Registration</title>
+</head>
+<body ng-app="EventApp">
+<script src="angular.min.js"></script>
+<h1>Event</h1>
+<!--Bắt đầu một phần có sử dụng AngularJS-->
+<div ng-controller="eventcontroller">
+    New-members: <input style="text" ng-model="quantity" id="quantity" ng-keypress="total=''">
+    <br>
+    <br>
+    Registration Fees: <input type="text" ng-model="fees" id="fees">
+<!--    Gọi hàm Calc khi click button Caculate-->
+    <input type="button" ng-click="Calc()" value="Caculate"/>
+    <br>
+    <br>
+<!--    Gọi giá trị total bằng cách sử dụng tên biến total đặt trong 2 dấu ngoặc kép -->
+    <b>Total Amount</b>: {{total}}
+</div>
+<script>
+    // Gọi tên module EventApp
+    var app = angular.module('EventApp', []);
+    app.controller('eventcontroller', function ($scope){
+        // Khai báo giá trị ban đầu của các phần tử quantity, fees = 0
+        $scope.quantity=0;
+        $scope.fees=0;
+        $scope.total="";
+        // Viết hàm Calc tính giá trị total
+        $scope.Calc = function (){
+            // Điều kiện để các biến luôn dương
+            if($scope.quantity>0 && $scope.fees>0){
+                $scope.total = $scope.quantity * $scope.fees;
+            } else {
+                $scope.total = "Invalid Input";
+            }
+        }
+    })
+</script>
+</body>
+</html>

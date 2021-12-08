@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tinhTien">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="control">
+    Nhập vào số năm làm việc của nhân viên: <input ng-model="years" style="text" ng-keypress="total=''"><br>
+    Nhập vào số lương trong một tháng của nhân viên: <input ng-model="month" type="text"><br>
+    <input   type="button" ng-click="Calc()"value="Caculate"/> <br>
+    <b>Số tiền mà nhân viên nhận được là</b>: {{total}}
+</div>
+<script>
+var app = angular.module('tinhTien', []);
+app.controller('control', function ($scope){
+    $scope.years=0;
+    $scope.month=0;
+    $scope.total="";
+    $scope.Calc = function (){
+        if($scope.years <= 5){
+            $scope.total = 3 * $scope.month - 3 * $scope.month * 0.1;
+        } else if($scope.years >= 5 && $scope.years <=10){
+            $scope.total = 6 * $scope.month - 6 * $scope.month * 0.1;
+        } else if($scope.years >=10){
+            $scope.total = 12 * $scope.month - 12 * $scope.month * 0.1;
+        } else{
+            $scope.total = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại!";
+        }
+    }
+})
+</script>
+</body>
+</html>
